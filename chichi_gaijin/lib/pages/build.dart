@@ -1,4 +1,7 @@
+import 'package:chichi_gaijin/build_widgets/body_card.dart';
 import 'package:chichi_gaijin/build_widgets/title_card.dart';
+import 'package:chichi_gaijin/build_widgets/translation_card.dart';
+import 'package:chichi_gaijin/build_widgets/vocab_card.dart';
 import 'package:chichi_gaijin/models/content_type.dart';
 import 'package:chichi_gaijin/providers/create_lesson.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +27,7 @@ class Build extends StatelessWidget {
             return Column(
               children: <Widget>[
                 Container(
-                  height: 500,
+                  height: 550,
                   width: 400,
                   child: ListView.builder(
                     itemCount: lessonCards.length,
@@ -32,18 +35,22 @@ class Build extends StatelessWidget {
                       final ContentType card = lessonCards[cardsIndex];
                       if (card is TitleType)
                         return TitleCard(
-                          cardsIndex: cardsIndex,
+                          cardsIndex: cardsIndex
                         );
                       else if (card is BodyType)
-                        return Text('body');
+                        return BodyCard(cardsIndex: cardsIndex);
                       else if (card is ReadingType)
                         return Text('reading');
+                      else if (card is VocabType)
+                        return VocabCard(cardsIndex: cardsIndex);
+                      else if (card is TranslationType)
+                        return TranslationCard(cardsIndex: cardsIndex);
                       else
                         return Text('invalid');
                     },
                   ),
                 ),
-                Row(
+                Wrap(
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () => createLesson.addCard(types.titleType),
@@ -57,6 +64,14 @@ class Build extends StatelessWidget {
                       onPressed: () => createLesson.addCard(types.readingType),
                       child: Text('add Reading Card'),
                     ),
+                    RaisedButton(
+                      onPressed: () => createLesson.addCard(types.vocabType),
+                      child: Text('add Vocab Card'),
+                    ),
+                    RaisedButton(
+                      onPressed: () => createLesson.addCard(types.translationType),
+                      child: Text('add Translation Card'),
+                    )
                   ],
                 )
               ],

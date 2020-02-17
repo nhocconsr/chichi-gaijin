@@ -18,6 +18,32 @@ class CreateLesson with ChangeNotifier {
       case types.bodyType:
         _lessonCards.add(BodyType(body: ''));
         break;
+      case types.vocabType:
+        _lessonCards.add(
+          VocabType(
+            word: Word(
+              japanese: '',
+              romaji: '',
+              english: '',
+              definition: '',
+            ),
+          ),
+        );
+        break;
+      case types.translationType:
+        _lessonCards.add(
+          TranslationType(
+            words: [
+              Word(
+                japanese: '',
+                romaji: '',
+                english: '',
+                definition: '',
+              ),
+            ],
+          ),
+        );
+        break;
       case types.readingType:
         _lessonCards.add(
           ReadingType(
@@ -38,7 +64,11 @@ class CreateLesson with ChangeNotifier {
     notifyListeners();
   }
 
-  alterTitleCard({@required int cardsIndex, @required String title, @required String subtitle}) {
+  alterTitleCard({
+    @required int cardsIndex,
+    @required String title,
+    @required String subtitle,
+  }) {
     TitleType card = subtitle == null
         ? TitleType(title: title)
         : TitleType(title: title, subtitle: subtitle);
@@ -62,8 +92,74 @@ class CreateLesson with ChangeNotifier {
       ],
     );
     notifyListeners();
-  
+  }
+
+  alterBodyCard({@required int cardsIndex, @required String body}) {
+    _lessonCards.replaceRange(cardsIndex, cardsIndex + 1, [
+      BodyType(body: body),
+    ]);
+    notifyListeners();
+  }
+
+  alterVocabCard({
+    @required int cardsIndex,
+    @required String japanese,
+    @required String romaji,
+    @required String english,
+    @required String definition,
+  }) {
+    _lessonCards.replaceRange(
+      cardsIndex,
+      cardsIndex + 1,
+      [
+        VocabType(
+          word: Word(
+            japanese: japanese,
+            romaji: romaji,
+            english: english,
+            definition: definition,
+          ),
+        ),
+      ],
+    );
+
+    notifyListeners();
+  }
+
+  //add a human readable translation to your translation card
+  addNaturalTranslation({@required int cardsIndex}) {
+    final TranslationType translationType = _lessonCards[cardsIndex];
+
+    _lessonCards.replaceRange(
+      cardsIndex,
+      cardsIndex + 1,
+      [
+        TranslationType(
+          words: translationType.words,
+          translation: '',
+        ),
+      ],
+    );
+
+    notifyListeners();
+  }
+
+  alterNaturalTranslation(
+      {@required int cardsIndex, @required String translation}) {
+    final TranslationType translationType = _lessonCards[cardsIndex];
+
+    _lessonCards.replaceRange(
+      cardsIndex,
+      cardsIndex + 1,
+      [
+        TranslationType(
+          words: translationType.words,
+          translation: translation,
+        ),
+      ],
+    );
+    notifyListeners();
   }
 }
 
-enum types { titleType, bodyType, readingType }
+enum types { titleType, bodyType, vocabType, translationType, readingType }
