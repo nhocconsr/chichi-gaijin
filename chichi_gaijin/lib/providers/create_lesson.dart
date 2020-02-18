@@ -10,6 +10,18 @@ class CreateLesson with ChangeNotifier {
     return _lessonCards;
   }
 
+  List<Word> get words {
+    List<Word> words = [];
+    for (int i = 0; i < _lessonCards.length; i++)
+      if (lessonCards[i] is VocabType)
+        words.add((lessonCards[i] as VocabType).word);
+    return words;
+  }
+
+  Word currentWord({int cardsIndex, int translationIndex}){
+    return (_lessonCards[cardsIndex] as TranslationType).words[translationIndex];
+  }
+
   addCard(types type) {
     switch (type) {
       case types.titleType:
@@ -23,6 +35,7 @@ class CreateLesson with ChangeNotifier {
           VocabType(
             word: Word(
               japanese: '',
+              kana: '',
               romaji: '',
               english: '',
               definition: '',
@@ -36,6 +49,7 @@ class CreateLesson with ChangeNotifier {
             words: [
               Word(
                 japanese: '',
+                kana: '',
                 romaji: '',
                 english: '',
                 definition: '',
@@ -50,6 +64,7 @@ class CreateLesson with ChangeNotifier {
             sentence: [
               Word(
                 japanese: '',
+                kana: '',
                 romaji: '',
                 english: '',
                 definition: '',
@@ -104,6 +119,7 @@ class CreateLesson with ChangeNotifier {
   alterVocabCard({
     @required int cardsIndex,
     @required String japanese,
+    @required String kana,
     @required String romaji,
     @required String english,
     @required String definition,
@@ -115,6 +131,7 @@ class CreateLesson with ChangeNotifier {
         VocabType(
           word: Word(
             japanese: japanese,
+            kana: kana,
             romaji: romaji,
             english: english,
             definition: definition,
@@ -125,6 +142,21 @@ class CreateLesson with ChangeNotifier {
 
     notifyListeners();
   }
+
+  addWord({@required int cardsIndex}) {
+    (_lessonCards[cardsIndex] as TranslationType).words.add(
+          Word(
+            japanese: '',
+            kana: '',
+            romaji: '',
+            english: '',
+            definition: '',
+          ),
+        );
+    notifyListeners();
+  }
+
+
 
   //add a human readable translation to your translation card
   addNaturalTranslation({@required int cardsIndex}) {
@@ -144,8 +176,21 @@ class CreateLesson with ChangeNotifier {
     notifyListeners();
   }
 
+  alterTranslationListWord({@required cardsIndex,
+      @required contentIndex,
+      @required translationIndex,
+      @required word, }){
+
+        final TranslationType translationType = _lessonCards[cardsIndex];
+
+        translationType.words.replaceRange(translationIndex, translationIndex+1, [word]);
+        _lessonCards.replaceRange(cardsIndex, cardsIndex+1, [translationType]);
+
+        notifyListeners();
+      }
+
   alterNaturalTranslation(
-      {@required int cardsIndex, @required String translation}) {
+      {@required int cardsIndex, @required String translation,}) {
     final TranslationType translationType = _lessonCards[cardsIndex];
 
     _lessonCards.replaceRange(

@@ -1,3 +1,4 @@
+import 'package:chichi_gaijin/build_widgets/display_or_search_words.dart';
 import 'package:chichi_gaijin/models/content_type.dart';
 import 'package:chichi_gaijin/providers/create_lesson.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class TranslationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CreateLesson>(
       builder: (_, createLesson, __) {
-        final TranslationType translationType = createLesson.lessonCards[cardsIndex];
+        final TranslationType translationType =
+            createLesson.lessonCards[cardsIndex];
         return Card(
           child: Container(
             decoration: BoxDecoration(
@@ -34,27 +36,53 @@ class TranslationCard extends StatelessWidget {
                   padding: EdgeInsets.all(4.0),
                   child: Text('Translation Card'),
                 ),
-                 translationType.translation ==
-                          null
-                      ? RaisedButton(
-                          onPressed: () => createLesson.addNaturalTranslation(cardsIndex: cardsIndex),
-                          child: Text('add human translation'),
-                        )
-                      : TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Translation',
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(border: Border.all()),
+                  child: Wrap(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => createLesson.addWord(cardsIndex: cardsIndex),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(),
                           ),
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          initialValue: translationType.translation == null ? '' : translationType.translation,
-                          onChanged: (translation) {
-                            createLesson.alterNaturalTranslation(
-                                cardsIndex: cardsIndex,
-                                translation: translation,
-                              );
-                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Text('add word'),
+                          ),
                         ),
+                      ),
+                      for (int translationIndex = 0;
+                          translationIndex < translationType.words.length;
+                          translationIndex++)
+                        DisplayOrSearchWords(cardsIndex: cardsIndex, translationIndex: translationIndex,)
+                    ],
+                  ),
+                ),
+                translationType.translation == null
+                    ? RaisedButton(
+                        onPressed: () => createLesson.addNaturalTranslation(
+                            cardsIndex: cardsIndex),
+                        child: Text('add human translation'),
+                      )
+                    : TextFormField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Translation',
+                        ),
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        initialValue: translationType.translation == null
+                            ? ''
+                            : translationType.translation,
+                        onChanged: (translation) {
+                          createLesson.alterNaturalTranslation(
+                            cardsIndex: cardsIndex,
+                            translation: translation,
+                          );
+                        },
+                      ),
               ],
             ),
           ),

@@ -42,6 +42,27 @@ class VocabCard extends StatelessWidget {
                       createLesson.alterVocabCard(
                         cardsIndex: cardsIndex,
                         japanese: japanese,
+                        kana: card.word.kana,
+                        romaji: card.word.romaji,
+                        english: card.word.english,
+                        definition: card.word.definition,
+                      );
+                    },
+                  ),
+                  //kana
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Kana',
+                    ),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    initialValue: card.word.kana,
+                    onChanged: (kana) {
+                      createLesson.alterVocabCard(
+                        cardsIndex: cardsIndex,
+                        japanese: card.word.japanese,
+                        kana: kana,
                         romaji: card.word.romaji,
                         english: card.word.english,
                         definition: card.word.definition,
@@ -61,6 +82,7 @@ class VocabCard extends StatelessWidget {
                       createLesson.alterVocabCard(
                         cardsIndex: cardsIndex,
                         japanese: card.word.japanese,
+                        kana: card.word.kana,
                         romaji: romaji,
                         english: card.word.english,
                         definition: card.word.definition,
@@ -80,6 +102,7 @@ class VocabCard extends StatelessWidget {
                       createLesson.alterVocabCard(
                         cardsIndex: cardsIndex,
                         japanese: card.word.japanese,
+                        kana: card.word.kana,
                         romaji: card.word.romaji,
                         english: english,
                         definition: card.word.definition,
@@ -99,6 +122,7 @@ class VocabCard extends StatelessWidget {
                       createLesson.alterVocabCard(
                         cardsIndex: cardsIndex,
                         japanese: card.word.japanese,
+                        kana: card.word.kana,
                         romaji: card.word.romaji,
                         english: card.word.english,
                         definition: definition,

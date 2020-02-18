@@ -1,0 +1,83 @@
+
+import 'package:chichi_gaijin/models/word.dart';
+import 'package:chichi_gaijin/providers/search_words.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'create_lesson.dart';
+
+class SearchProxy {
+  CreateLesson createLesson;
+  SearchWords searchWords;
+
+  SearchProxy({
+    this.createLesson,
+    this.searchWords,
+  });
+
+  List<Word> get filteredList {
+    return searchWords.filteredList;
+  }
+
+  bool get alive{
+    return searchWords.alive;
+  }
+
+  int get current{
+    return searchWords.current;
+  }
+
+
+  live({@required int current}){
+    searchWords.live(current: current);
+  }
+
+  Word currentWord({@required int cardsIndex, @required int translationIndex}){
+    return createLesson.currentWord(cardsIndex: cardsIndex, translationIndex: translationIndex);
+  }
+
+  openSearch(int newCurrent) {
+    searchWords.live();
+    searchWords.setCurrent(newCurrent);
+  }
+
+  kill() {
+    searchWords.dead();
+
+    searchWords.setCurrent(-1);
+  }
+
+  kill2(int cardsIndex, int contentIndex) {
+    searchWords.dead();
+
+    Word first = searchWords.filteredList.isEmpty
+        ? Word(japanese: '', kana: '', romaji: '', english: '', definition: '')
+        : searchWords.filteredList[0];
+
+    /*createLesson.alterTranslationListWord(
+      cardsIndex: cardsIndex,
+      contentIndex: contentIndex,
+      conceptIndex: searchWords.current,
+      concept: first,
+    );*/
+
+    searchWords.setCurrent(-1);
+  }
+
+  kill3(int cardsIndex, int contentIndex, Word word) {
+    searchWords.dead();
+
+    createLesson.alterTranslationListWord(
+      cardsIndex: cardsIndex,
+      contentIndex: contentIndex,
+      translationIndex: searchWords.current,
+      word: word,
+    );
+
+    searchWords.setCurrent(-1);
+  }
+
+  updateFilteredList(String romaji) {
+    List<Word> words = createLesson.words;
+    searchWords.updateFiltered(romaji, words);
+  }
+}

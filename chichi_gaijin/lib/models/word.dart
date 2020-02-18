@@ -7,6 +7,8 @@ class Word{
   //most common reading for this word; kanji included
   final String japanese;
   //no kanji
+  final String kana;
+  //kana in english
   final String romaji;
   //the smallest possible translation for this word
   //do not included multiple definitions here
@@ -16,6 +18,7 @@ class Word{
 
   const Word({
     @required this.japanese,
+    @required this.kana,
     @required this.romaji,
     @required this.english,
     @required this.definition,
