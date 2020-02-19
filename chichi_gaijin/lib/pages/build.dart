@@ -1,5 +1,4 @@
 import 'package:chichi_gaijin/build_widgets/body_card.dart';
-import 'package:chichi_gaijin/build_widgets/meta_card.dart';
 import 'package:chichi_gaijin/build_widgets/title_card.dart';
 import 'package:chichi_gaijin/build_widgets/translation_card.dart';
 import 'package:chichi_gaijin/build_widgets/vocab_card.dart';
@@ -42,6 +41,20 @@ class Build extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Text',
+                      ),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      initialValue: createLesson.title,
+                      onChanged: (title) {
+                        createLesson.alterTitle(
+                          title: title,
+                        );
+                      },
+                    ),
                     Container(
                       height: 550,
                       width: 400,
@@ -49,9 +62,7 @@ class Build extends StatelessWidget {
                         itemCount: lessonCards.length,
                         itemBuilder: (BuildContext context, int cardsIndex) {
                           final ContentType card = lessonCards[cardsIndex];
-                          if (card is MetaType)
-                            return MetaCard();
-                          else if (card is TitleType)
+                          if (card is TitleType)
                             return TitleCard(cardsIndex: cardsIndex);
                           else if (card is BodyType)
                             return BodyCard(cardsIndex: cardsIndex);
@@ -96,10 +107,11 @@ class Build extends StatelessWidget {
                           builder: (_, lessons, __) {
                             return RaisedButton(
                               onPressed: () => {
-                                lessons.addGeneralLesson(
-                                    lessonCards: lessonCards,
-                                    title: (lessonCards[0] as MetaType).title),
-                                createLesson.clear(),
+                              
+                                  lessons.addGeneralLesson(
+                                      lessonCards: lessonCards,
+                                      title: createLesson.title).whenComplete(() => {}),
+                                      //calling createLesson.clear here deletes the lesson before it's saved
                                 Navigator.pop(context),
                               },
                               child: Text('finish'),

@@ -9,7 +9,7 @@ class Lessons with ChangeNotifier {
     return _lessons;
   }
 
-  addGeneralLesson({List<ContentType> lessonCards, String title}) {
+  Future<void> addGeneralLesson({List<ContentType> lessonCards, String title}) async {
     _lessons.add(
       GeneralLesson(
         lessonCards: lessonCards,

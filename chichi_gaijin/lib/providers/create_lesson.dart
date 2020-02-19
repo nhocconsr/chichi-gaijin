@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 
 //Holds a single Lesson in the process of being created
 class CreateLesson with ChangeNotifier {
-  List<ContentType> _lessonCards = [MetaType(title: '')];
+  List<ContentType> _lessonCards = [];
+  String _title = '';
 
   List<ContentType> get lessonCards {
     return _lessonCards;
@@ -18,9 +19,13 @@ class CreateLesson with ChangeNotifier {
     return words;
   }
 
-  clear() {
+  String get title{
+    return _title;
+  }
+
+  Future<void> clear() async {
+    _title = '';
     _lessonCards.clear();
-    _lessonCards.add(MetaType(title: ''));
     notifyListeners();
   }
 
@@ -86,8 +91,8 @@ class CreateLesson with ChangeNotifier {
     notifyListeners();
   }
 
-  alterMetaCard({@required String title}) {
-    _lessonCards.replaceRange(0, 1, [MetaType(title: title)]);
+  alterTitle({@required String title}){
+    _title = title;
     notifyListeners();
   }
 

@@ -1,5 +1,6 @@
 import 'package:chichi_gaijin/models/lesson_type.dart';
 import 'package:chichi_gaijin/navigation/main_drawer.dart';
+import 'package:chichi_gaijin/pages/lesson.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,9 @@ class Home extends StatelessWidget {
           itemCount: lessons.length,
           itemBuilder: (BuildContext context, int lessonsIndex) {
             final GeneralLesson lesson = lessons[lessonsIndex];
-            return Text(lesson.title);
+            return GestureDetector(
+              onTap: () => Navigator.pushNamed(context, Lesson.routeName, arguments: lessonsIndex),
+              child: Text(lesson.title));
           }),
       drawer: MainDrawer(),
     );
