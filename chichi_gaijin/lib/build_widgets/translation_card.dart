@@ -64,7 +64,7 @@ class TranslationCard extends StatelessWidget {
                     ? RaisedButton(
                         onPressed: () => createLesson.addNaturalTranslation(
                             cardsIndex: cardsIndex),
-                        child: Text('add human translation'),
+                        child: Text('add natural english'),
                       )
                     : TextFormField(
                         decoration: InputDecoration(

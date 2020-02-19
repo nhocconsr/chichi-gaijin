@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 //Holds a single Lesson in the process of being created
 class CreateLesson with ChangeNotifier {
-  List<ContentType> _lessonCards = [];
+  List<ContentType> _lessonCards = [MetaType(title: '')];
 
   List<ContentType> get lessonCards {
     return _lessonCards;
@@ -18,8 +18,15 @@ class CreateLesson with ChangeNotifier {
     return words;
   }
 
-  Word currentWord({int cardsIndex, int translationIndex}){
-    return (_lessonCards[cardsIndex] as TranslationType).words[translationIndex];
+  clear() {
+    _lessonCards.clear();
+    _lessonCards.add(MetaType(title: ''));
+    notifyListeners();
+  }
+
+  Word currentWord({int cardsIndex, int translationIndex}) {
+    return (_lessonCards[cardsIndex] as TranslationType)
+        .words[translationIndex];
   }
 
   addCard(types type) {
@@ -76,6 +83,11 @@ class CreateLesson with ChangeNotifier {
       default:
         print('y u do this');
     }
+    notifyListeners();
+  }
+
+  alterMetaCard({@required String title}) {
+    _lessonCards.replaceRange(0, 1, [MetaType(title: title)]);
     notifyListeners();
   }
 
@@ -156,8 +168,6 @@ class CreateLesson with ChangeNotifier {
     notifyListeners();
   }
 
-
-
   //add a human readable translation to your translation card
   addNaturalTranslation({@required int cardsIndex}) {
     final TranslationType translationType = _lessonCards[cardsIndex];
@@ -176,21 +186,24 @@ class CreateLesson with ChangeNotifier {
     notifyListeners();
   }
 
-  alterTranslationListWord({@required cardsIndex,
-      @required contentIndex,
-      @required translationIndex,
-      @required word, }){
+  alterTranslationListWord({
+    @required cardsIndex,
+    @required translationIndex,
+    @required word,
+  }) {
+    final TranslationType translationType = _lessonCards[cardsIndex];
 
-        final TranslationType translationType = _lessonCards[cardsIndex];
+    translationType.words
+        .replaceRange(translationIndex, translationIndex + 1, [word]);
+    _lessonCards.replaceRange(cardsIndex, cardsIndex + 1, [translationType]);
 
-        translationType.words.replaceRange(translationIndex, translationIndex+1, [word]);
-        _lessonCards.replaceRange(cardsIndex, cardsIndex+1, [translationType]);
+    notifyListeners();
+  }
 
-        notifyListeners();
-      }
-
-  alterNaturalTranslation(
-      {@required int cardsIndex, @required String translation,}) {
+  alterNaturalTranslation({
+    @required int cardsIndex,
+    @required String translation,
+  }) {
     final TranslationType translationType = _lessonCards[cardsIndex];
 
     _lessonCards.replaceRange(

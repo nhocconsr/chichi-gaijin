@@ -46,30 +46,28 @@ class SearchProxy {
     searchWords.setCurrent(-1);
   }
 
-  kill2(int cardsIndex, int contentIndex) {
+  kill2(int cardsIndex, int translationIndex) {
     searchWords.dead();
 
     Word first = searchWords.filteredList.isEmpty
         ? Word(japanese: '', kana: '', romaji: '', english: '', definition: '')
         : searchWords.filteredList[0];
 
-    /*createLesson.alterTranslationListWord(
+    createLesson.alterTranslationListWord(
       cardsIndex: cardsIndex,
-      contentIndex: contentIndex,
-      conceptIndex: searchWords.current,
-      concept: first,
-    );*/
+      translationIndex: translationIndex,
+      word: first,
+    );
 
     searchWords.setCurrent(-1);
   }
 
-  kill3(int cardsIndex, int contentIndex, Word word) {
+  kill3(int cardsIndex, int translationIndex, Word word) {
     searchWords.dead();
 
     createLesson.alterTranslationListWord(
       cardsIndex: cardsIndex,
-      contentIndex: contentIndex,
-      translationIndex: searchWords.current,
+      translationIndex: translationIndex,
       word: word,
     );
 

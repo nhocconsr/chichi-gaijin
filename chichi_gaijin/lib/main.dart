@@ -1,6 +1,7 @@
 import 'package:chichi_gaijin/pages/build.dart';
 import 'package:chichi_gaijin/pages/home.dart';
 import 'package:chichi_gaijin/providers/create_lesson.dart';
+import 'package:chichi_gaijin/providers/lessons.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CreateLesson>(create: (_) => CreateLesson()),
+        ChangeNotifierProvider<Lessons>(create: (_) => Lessons()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

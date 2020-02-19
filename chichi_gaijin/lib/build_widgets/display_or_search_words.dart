@@ -24,11 +24,11 @@ class DisplayOrSearchWords extends StatelessWidget {
             ? Column(
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () => searchProxy.kill2(cardsIndex, translationIndex),
+                    onTap: () =>
+                        searchProxy.kill2(cardsIndex, translationIndex),
                     child: Container(
-                      height: 50,
-                      width: 100,
-                      color: Colors.blue,
+                      height: 100,
+                      padding: const EdgeInsets.all(8.0),
                       child: searchProxy.filteredList == null
                           ? Container(
                               height: 20,
@@ -43,27 +43,34 @@ class DisplayOrSearchWords extends StatelessWidget {
                                   onTap: () => searchProxy.kill3(
                                     cardsIndex,
                                     translationIndex,
-                                    searchProxy
-                                        .filteredList[filteredListIndex],
+                                    searchProxy.filteredList[filteredListIndex],
                                   ),
                                   child: Text(
                                     searchProxy
-                                        .filteredList[filteredListIndex].romaji,
+                                        .filteredList[filteredListIndex].romaji + ' | ' + searchProxy
+                                        .filteredList[filteredListIndex].japanese + ' | ' + searchProxy
+                                        .filteredList[filteredListIndex].english,
                                   ),
                                 );
-                              }),
+                              },
+                            ),
                     ),
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Search Words',
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Search Words',
+                      ),
+                      initialValue: word.romaji,
+                      onChanged: (romaji) {
+                        searchProxy.updateFilteredList(romaji);
+                      },
+                      onFieldSubmitted: (romaji) {
+                        searchProxy.kill2(cardsIndex, translationIndex);
+                      },
                     ),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    initialValue: word.romaji,
-                    onChanged: (romaji) {searchProxy
-                                              .updateFilteredList(romaji);},
                   )
                 ],
               )
@@ -74,7 +81,7 @@ class DisplayOrSearchWords extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(width: 0.5),
                   ),
-                  child: Text('${word.romaji}'),
+                  child: Text('${word.romaji ==  '' ? '   ' : word.romaji}'),
                 ),
               );
       },

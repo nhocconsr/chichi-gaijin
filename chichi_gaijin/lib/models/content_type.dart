@@ -5,6 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:chichi_gaijin/models/word.dart';
 //Each ContentType represents a single Card that will be displayed on the screen at a time
 abstract class ContentType {}
+
+class MetaType implements ContentType{
+  final String title;
+
+  const MetaType({@required this.title});  
+}
+
 //Data in a Title Card, contains one title and optionally one subtitle
 class TitleType implements ContentType {
   final String title;
