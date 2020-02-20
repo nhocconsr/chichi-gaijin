@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
       body: ListView.builder(
           itemCount: lessons.length,
           itemBuilder: (BuildContext context, int lessonsIndex) {
-            final GeneralLesson lesson = lessons[lessonsIndex];
+            final LessonType lesson = lessons[lessonsIndex];
             return GestureDetector(
               onTap: () => Navigator.pushNamed(context, Lesson.routeName, arguments: lessonsIndex),
               child: Text(lesson.title));

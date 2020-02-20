@@ -9,10 +9,11 @@ class Lessons with ChangeNotifier {
     return _lessons;
   }
 
-  Future<void> addGeneralLesson({List<ContentType> lessonCards, String title}) async {
+  Future<void> addLesson({List<ContentType> lessonCards, String title}) async {
+    List<ContentType> cards = []..addAll(lessonCards);
     _lessons.add(
-      GeneralLesson(
-        lessonCards: lessonCards,
+      LessonType(
+        lessonCards: cards,
         title: title,
       ),
     );

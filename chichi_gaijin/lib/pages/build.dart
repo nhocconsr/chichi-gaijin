@@ -4,6 +4,7 @@ import 'package:chichi_gaijin/build_widgets/translation_card.dart';
 import 'package:chichi_gaijin/build_widgets/vocab_card.dart';
 import 'package:chichi_gaijin/models/content_type.dart';
 import 'package:chichi_gaijin/providers/create_lesson.dart';
+import 'package:chichi_gaijin/providers/finalize_lesson_proxy.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:chichi_gaijin/providers/search_proxy.dart';
 import 'package:chichi_gaijin/providers/search_words.dart';
@@ -23,6 +24,12 @@ class Build extends StatelessWidget {
           update: (_, createLesson, searchConcepts, __) => SearchProxy(
             createLesson: createLesson,
             searchWords: searchConcepts,
+          ),
+        ),
+        ProxyProvider2<CreateLesson, Lessons, FinalizeLessonProxy>(
+          update: (_, createLesson, lessons, __) => FinalizeLessonProxy(
+            createLesson: createLesson,
+            lessons: lessons,
           ),
         ),
       ],
@@ -103,15 +110,13 @@ class Build extends StatelessWidget {
                               createLesson.addCard(types.translationType),
                           child: Text('add Translation Card'),
                         ),
-                        Consumer<Lessons>(
-                          builder: (_, lessons, __) {
+                        Consumer<FinalizeLessonProxy>(
+                          builder: (_, finalizeLessonProxy, __) {
                             return RaisedButton(
                               onPressed: () => {
-                              
-                                  lessons.addGeneralLesson(
-                                      lessonCards: lessonCards,
-                                      title: createLesson.title).whenComplete(() => {}),
-                                      //calling createLesson.clear here deletes the lesson before it's saved
+                                finalizeLessonProxy.finalize(
+                                    lessonCards: lessonCards,
+                                    title: createLesson.title),
                                 Navigator.pop(context),
                               },
                               child: Text('finish'),

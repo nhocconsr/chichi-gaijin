@@ -19,14 +19,16 @@ class CreateLesson with ChangeNotifier {
     return words;
   }
 
-  String get title{
+  String get title {
     return _title;
   }
 
-  Future<void> clear() async {
-    _title = '';
-    _lessonCards.clear();
-    notifyListeners();
+  clear() async {
+ 
+      _title = '';
+      _lessonCards.clear();
+      notifyListeners();
+    
   }
 
   Word currentWord({int cardsIndex, int translationIndex}) {
@@ -91,7 +93,7 @@ class CreateLesson with ChangeNotifier {
     notifyListeners();
   }
 
-  alterTitle({@required String title}){
+  alterTitle({@required String title}) {
     _title = title;
     notifyListeners();
   }

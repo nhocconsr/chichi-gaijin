@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'create_lesson.dart';
 
 class SearchProxy {
-  CreateLesson createLesson;
-  SearchWords searchWords;
+  final CreateLesson createLesson;
+  final SearchWords searchWords;
 
   SearchProxy({
     this.createLesson,
