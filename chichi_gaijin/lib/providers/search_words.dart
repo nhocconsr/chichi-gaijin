@@ -1,6 +1,6 @@
 import 'package:chichi_gaijin/models/word.dart';
 import 'package:flutter/material.dart';
-
+//search by romaji
 class SearchWords with ChangeNotifier {
   List<Word> _filteredList = [];
 

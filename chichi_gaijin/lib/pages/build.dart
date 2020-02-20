@@ -2,12 +2,15 @@ import 'package:chichi_gaijin/build_widgets/body_card.dart';
 import 'package:chichi_gaijin/build_widgets/title_card.dart';
 import 'package:chichi_gaijin/build_widgets/translation_card.dart';
 import 'package:chichi_gaijin/build_widgets/vocab_card.dart';
-import 'package:chichi_gaijin/models/content_type.dart';
+//providers
 import 'package:chichi_gaijin/providers/create_lesson.dart';
 import 'package:chichi_gaijin/providers/finalize_lesson_proxy.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:chichi_gaijin/providers/search_proxy.dart';
 import 'package:chichi_gaijin/providers/search_words.dart';
+//models
+import 'package:chichi_gaijin/models/content_type.dart';
+//external imports
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

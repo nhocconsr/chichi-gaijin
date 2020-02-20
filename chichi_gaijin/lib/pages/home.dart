@@ -2,9 +2,10 @@ import 'package:chichi_gaijin/models/lesson_type.dart';
 import 'package:chichi_gaijin/navigation/main_drawer.dart';
 import 'package:chichi_gaijin/pages/lesson.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
+//external imports
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+//first page someone sees when starting the app
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

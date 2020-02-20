@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        //allows sending of arguments with route
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == Lesson.routeName)
             return MaterialPageRoute(

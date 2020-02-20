@@ -14,6 +14,7 @@ class TranslationLesson extends StatelessWidget {
     final lessonsProvider = Provider.of<Lessons>(context);
     final TranslationType card =
         lessonsProvider.lessons[lessonsIndex].lessonCards[cardsIndex];
+        //TODO: this v
     return Container();
   }
 }

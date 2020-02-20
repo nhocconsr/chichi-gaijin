@@ -1,9 +1,8 @@
 import 'package:chichi_gaijin/lesson_widgets/lesson_page_view.dart';
-import 'package:chichi_gaijin/models/lesson_type.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+//First point of touch whenever someone starts a lesson
 class Lesson extends StatelessWidget {
   static const routeName = '/lessons';
 

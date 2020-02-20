@@ -2,7 +2,7 @@ import 'package:chichi_gaijin/models/content_type.dart';
 import 'package:chichi_gaijin/providers/create_lesson.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:flutter/cupertino.dart';
-
+//not necessary, but qol when using two providers
 class FinalizeLessonProxy {
   final CreateLesson createLesson;
   final Lessons lessons;
