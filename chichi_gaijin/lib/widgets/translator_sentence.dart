@@ -37,27 +37,29 @@ class _TranslatorSentenceState extends State<TranslatorSentence> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: <Widget>[
-        if (currentPage != 4)
-          for (int cardsIndex = 0;
-              cardsIndex < widget.card.words.length;
-              cardsIndex++)
-            if (currentCard[cardsIndex] == 0)
-              Text(widget.card.words[cardsIndex].japanese)
-            else if (currentCard[cardsIndex] == 1)
-              Text(widget.card.words[cardsIndex].kana)
-            else if (currentCard[cardsIndex] == 2)
-              Text(widget.card.words[cardsIndex].romaji)
-            else
-              Text(widget.card.words[cardsIndex].english)
-        else if (currentPage == 4)
-          Text(widget.card.translation),
-        RaisedButton(
-          onPressed: () => changePage(),
-          child: Text('change'),
-        ),
-      ],
+    return Center(
+      child: Wrap(
+        children: <Widget>[
+          if (currentPage != 4)
+            for (int cardsIndex = 0;
+                cardsIndex < widget.card.words.length;
+                cardsIndex++)
+              if (currentCard[cardsIndex] == 0)
+                Text(widget.card.words[cardsIndex].japanese)
+              else if (currentCard[cardsIndex] == 1)
+                Text(widget.card.words[cardsIndex].kana)
+              else if (currentCard[cardsIndex] == 2)
+                Text(widget.card.words[cardsIndex].romaji)
+              else
+                Text(widget.card.words[cardsIndex].english)
+          else if (currentPage == 4)
+            Text(widget.card.translation),
+          RaisedButton(
+            onPressed: () => changePage(),
+            child: Text('change'),
+          ),
+        ],
+      ),
     );
   }
 }

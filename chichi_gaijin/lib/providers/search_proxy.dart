@@ -1,5 +1,6 @@
 
 import 'package:chichi_gaijin/models/word.dart';
+import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:chichi_gaijin/providers/search_words.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,10 +9,12 @@ import 'create_lesson.dart';
 class SearchProxy {
   final CreateLesson createLesson;
   final SearchWords searchWords;
+  final Lessons lessons;
 
   SearchProxy({
-    this.createLesson,
-    this.searchWords,
+    @required this.createLesson,
+    @required this.searchWords,
+    @required this.lessons,
   });
 
   List<Word> get filteredList {
@@ -75,7 +78,7 @@ class SearchProxy {
   }
 
   updateFilteredList(String romaji) {
-    List<Word> words = createLesson.words;
+    List<Word> words = [...createLesson.words, ...lessons.words];
     searchWords.updateFiltered(romaji, words);
   }
 }

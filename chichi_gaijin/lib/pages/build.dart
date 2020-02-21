@@ -23,10 +23,11 @@ class Build extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SearchWords>(create: (_) => SearchWords()),
         //Proxy provider allows ease of management when using two providers at once
-        ProxyProvider2<CreateLesson, SearchWords, SearchProxy>(
-          update: (_, createLesson, searchConcepts, __) => SearchProxy(
+        ProxyProvider3<CreateLesson, SearchWords, Lessons, SearchProxy>(
+          update: (_, createLesson, searchConcepts, lessons, __) => SearchProxy(
             createLesson: createLesson,
             searchWords: searchConcepts,
+            lessons: lessons,
           ),
         ),
         ProxyProvider2<CreateLesson, Lessons, FinalizeLessonProxy>(
