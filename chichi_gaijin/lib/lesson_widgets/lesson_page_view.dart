@@ -8,6 +8,8 @@ import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'end_card.dart';
+
 class LessonPageView extends StatelessWidget {
   final int lessonsIndex;
 
@@ -21,19 +23,34 @@ class LessonPageView extends StatelessWidget {
         final LessonType lesson = lessons[lessonsIndex];
         return Container(
           child: PageView.builder(
-            itemCount: lesson.lessonCards.length,
+            itemCount: lesson.lessonCards.length + 1,
             itemBuilder: (BuildContext context, int cardsIndex) {
-              final card = lesson.lessonCards[cardsIndex];
-              if (card is TitleType)
-                return TitleLesson(cardsIndex: cardsIndex, lessonsIndex: lessonsIndex,);
-              else if (card is BodyType)
-                return BodyLesson(cardsIndex: cardsIndex, lessonsIndex: lessonsIndex,);
-              else if (card is VocabType)
-                return VocabLesson(cardsIndex: cardsIndex, lessonsIndex: lessonsIndex,);
-              else if (card is TranslationType)
-                return TranslationLesson(cardsIndex: cardsIndex, lessonsIndex: lessonsIndex,);
-              else
-                return Text('thats the wrong number');
+              if (lesson.lessonCards.length != cardsIndex) {
+                final card = lesson.lessonCards[cardsIndex];
+                if (card is TitleType)
+                  return TitleLesson(
+                    cardsIndex: cardsIndex,
+                    lessonsIndex: lessonsIndex,
+                  );
+                else if (card is BodyType)
+                  return BodyLesson(
+                    cardsIndex: cardsIndex,
+                    lessonsIndex: lessonsIndex,
+                  );
+                else if (card is VocabType)
+                  return VocabLesson(
+                    cardsIndex: cardsIndex,
+                    lessonsIndex: lessonsIndex,
+                  );
+                else if (card is TranslationType)
+                  return TranslationLesson(
+                    cardsIndex: cardsIndex,
+                    lessonsIndex: lessonsIndex,
+                  );
+                else
+                  return Text('thats the wrong number');
+              } else
+                return EndCard(lessonWords: lesson.words);
             },
           ),
         );

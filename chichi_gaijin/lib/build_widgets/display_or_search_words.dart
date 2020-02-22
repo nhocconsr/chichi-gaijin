@@ -1,5 +1,5 @@
 import 'package:chichi_gaijin/models/word.dart';
-import 'package:chichi_gaijin/providers/search_proxy.dart';
+import 'package:chichi_gaijin/providers/proxys/search_proxy.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
