@@ -1,21 +1,34 @@
-
+import 'package:chichi_gaijin/models/confidence_word.dart';
 import 'package:chichi_gaijin/models/word.dart';
 import 'package:flutter/cupertino.dart';
 
-class Reviews with ChangeNotifier{
-  List<Word> _words = [];
+class Reviews with ChangeNotifier {
+  List<ConfidenceWord> _confidence = [];
 
-  List<Word> get words {
-    return _words;
+  List<ConfidenceWord> get confidence {
+    return _confidence;
   }
 
-  addWord(Word word){
-    _words.add(word);
+  addConfidence(Word word) {
+    _confidence.add(
+      ConfidenceWord(
+        word: word,
+        timesCorrect: 0,
+        nextAppearance: DateTime.now(),
+      ),
+    );
     notifyListeners();
   }
 
-  addWords({@required List<Word> words}){
-    _words.addAll(words);
+  addConfidences({@required List<Word> words}) {
+    for (int i = 0; i < words.length; i++)
+      _confidence.add(
+        ConfidenceWord(
+          word: words[i],
+          timesCorrect: 0,
+          nextAppearance: DateTime.now(),
+        ),
+      );
     notifyListeners();
   }
 }

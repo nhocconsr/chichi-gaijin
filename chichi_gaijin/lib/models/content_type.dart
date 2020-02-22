@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 
 import 'package:chichi_gaijin/models/word.dart';

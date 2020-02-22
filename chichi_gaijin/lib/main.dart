@@ -1,7 +1,9 @@
 import 'package:chichi_gaijin/pages/build.dart';
 import 'package:chichi_gaijin/pages/home.dart';
 import 'package:chichi_gaijin/pages/lesson.dart';
+import 'package:chichi_gaijin/pages/review.dart';
 import 'package:chichi_gaijin/providers/create_lesson.dart';
+import 'package:chichi_gaijin/providers/deck.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:chichi_gaijin/providers/reviews.dart';
 
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<CreateLesson>(create: (_) => CreateLesson()),
         ChangeNotifierProvider<Lessons>(create: (_) => Lessons()),
         ChangeNotifierProvider<Reviews>(create: (_) => Reviews(),),
+        ChangeNotifierProvider<Deck>(create:(_) => Deck(),),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -43,6 +46,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => Home(),
           Build.routeName: (_) => Build(),
+          Review.routeName: (_) => Review(),
         },
       ),
     );

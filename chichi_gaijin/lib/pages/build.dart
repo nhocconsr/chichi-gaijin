@@ -4,10 +4,10 @@ import 'package:chichi_gaijin/build_widgets/translation_card.dart';
 import 'package:chichi_gaijin/build_widgets/vocab_card.dart';
 //providers
 import 'package:chichi_gaijin/providers/create_lesson.dart';
+import 'package:chichi_gaijin/providers/deck.dart';
 import 'package:chichi_gaijin/providers/proxys/finalize_lesson_proxy.dart';
 import 'package:chichi_gaijin/providers/lessons.dart';
 import 'package:chichi_gaijin/providers/proxys/search_proxy.dart';
-import 'package:chichi_gaijin/providers/reviews.dart';
 import 'package:chichi_gaijin/providers/search_words.dart';
 //models
 import 'package:chichi_gaijin/models/content_type.dart';
@@ -24,11 +24,11 @@ class Build extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SearchWords>(create: (_) => SearchWords()),
         //Proxy provider allows ease of management when using two providers at once
-        ProxyProvider3<CreateLesson, SearchWords, Reviews, SearchProxy>(
-          update: (_, createLesson, searchConcepts, reviews, __) => SearchProxy(
+        ProxyProvider3<CreateLesson, SearchWords, Deck, SearchProxy>(
+          update: (_, createLesson, searchConcepts, deck, __) => SearchProxy(
             createLesson: createLesson,
             searchWords: searchConcepts,
-            reviews: reviews,
+            deck: deck,
           ),
         ),
         ProxyProvider2<CreateLesson, Lessons, FinalizeLessonProxy>(

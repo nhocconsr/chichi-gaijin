@@ -1,4 +1,5 @@
 import 'package:chichi_gaijin/pages/build.dart';
+import 'package:chichi_gaijin/pages/review.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -37,6 +38,12 @@ class MainDrawer extends StatelessWidget {
             title: Text('Create'),
             onTap: () {
               Navigator.popAndPushNamed(context, Build.routeName);
+            },
+          ),
+          ListTile(
+            title: Text('Review'),
+            onTap: () {
+              Navigator.popAndPushNamed(context, Review.routeName);
             },
           ),
         ],
